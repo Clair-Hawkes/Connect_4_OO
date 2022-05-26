@@ -2,6 +2,12 @@
 /*
 Ex: Function A: Moved
 FunctionB:
+
+makeBoard:Moved
+makeHTMLBoard: Moved
+findSpotForCol:
+
+
 */
 
 
@@ -13,7 +19,44 @@ class Game {
     this.currPlayer = 1;
   }
 
+  makeBoard() {
+    for (let y = 0; y < this.height; y++) {
+      //Change WIDTH to width & HEIGHT to height as no longer global consts
+      //Potential deep dive what is Array.from({obj})
+      board.push(Array.from({ length: this.width }));
+    }
+  }
 
+  makeHtmlBoard() {
+    const board = document.getElementById('board');
+
+    // make column tops (clickable area for adding a piece to that column)
+    const top = document.createElement('tr');
+    top.setAttribute('id', 'column-top');
+    top.addEventListener('click', handleClick);
+
+    for (let x = 0; x < this.width; x++) {
+      const headCell = document.createElement('td');
+      headCell.setAttribute('id', x);
+      top.append(headCell);
+    }
+
+    board.append(top);
+
+    // make main part of board
+    for (let y = 0; y < this.height; y++) {
+      const row = document.createElement('tr');
+
+      for (let x = 0; x < this.width; x++) {
+        const cell = document.createElement('td');
+        cell.setAttribute('id', `${y}-${x}`);
+        row.append(cell);
+      }
+
+      //Referencing the local scoped const board variable
+      board.append(row);
+    }
+  }
 
 }
 
@@ -73,6 +116,16 @@ function makeHtmlBoard() {
 
     board.append(row);
   }
+
+  function findSpotForCol(x) {
+    for (let y = HEIGHT - 1; y >= 0; y--) {
+      if (!board[y][x]) {
+        return y;
+      }
+    }
+    return null;
+  }
+
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
