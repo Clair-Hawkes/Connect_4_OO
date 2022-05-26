@@ -1,3 +1,25 @@
+//Function List
+/*
+Ex: Function A: Moved
+FunctionB:
+*/
+
+
+class Game {
+  constructor(height=6,width=7){
+    this.height = height;
+    this.width = width;
+    this.board = [];
+    this.currPlayer = 1;
+  }
+
+
+
+}
+
+
+
+
 /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
@@ -97,17 +119,17 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   board[y][x] = currPlayer;
   placeInTable(y, x);
-  
+
   // check for win
   if (checkForWin()) {
     return endGame(`Player ${currPlayer} won!`);
   }
-  
+
   // check for tie
   if (board.every(row => row.every(cell => cell))) {
     return endGame('Tie!');
   }
-    
+
   // switch players
   currPlayer = currPlayer === 1 ? 2 : 1;
 }
