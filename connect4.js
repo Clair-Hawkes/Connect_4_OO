@@ -5,7 +5,7 @@ FunctionB:
 
 makeBoard:Moved
 makeHTMLBoard: Moved
-findSpotForCol:
+findSpotForCol: Moved
 
 
 */
@@ -23,7 +23,7 @@ class Game {
     for (let y = 0; y < this.height; y++) {
       //Change WIDTH to width & HEIGHT to height as no longer global consts
       //Potential deep dive what is Array.from({obj})
-      board.push(Array.from({ length: this.width }));
+      this.board.push(Array.from({ length: this.width }));
     }
   }
 
@@ -33,7 +33,8 @@ class Game {
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
-    top.addEventListener('click', handleClick);
+    //can we use .bind for the handleClick? 
+    top.addEventListener('click', this.handleClick);
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
@@ -56,6 +57,16 @@ class Game {
       //Referencing the local scoped const board variable
       board.append(row);
     }
+  }
+
+  findSpotForCol(x) {
+    for (let y = this.height - 1; y >= 0; y--) {
+      //board here is board within constructor, needs access with this.
+      if (!this.board[y][x]) {
+        return y;
+      }
+    }
+    return null;
   }
 
 }
