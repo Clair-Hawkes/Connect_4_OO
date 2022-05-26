@@ -9,6 +9,7 @@ makeBoard:Moved
 makeHTMLBoard: Moved
 findSpotForCol: Moved
 placeInTable: Moved
+endGame: Moved
 
 */
 
@@ -35,7 +36,7 @@ class Game {
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
-    //can we use .bind for the handleClick? 
+    //can we use .bind for the handleClick?
     top.addEventListener('click', this.handleClick);
 
     for (let x = 0; x < this.width; x++) {
@@ -76,10 +77,16 @@ class Game {
     piece.classList.add('piece');
     piece.classList.add(`p${currPlayer}`);
     piece.style.top = -50 * (y + 2);
-  
+
     const spot = document.getElementById(`${y}-${x}`);
     spot.append(piece);
   }
+
+  endGame(msg) {
+    alert(msg);
+  }
+
+
 }
 
 
