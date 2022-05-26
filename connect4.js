@@ -5,7 +5,7 @@
 Ex: Function A: Moved
 FunctionB:
 
-makeBoard:Moved
+makeBoard:Move,
 makeHTMLBoard: Moved
 findSpotForCol: Moved
 placeInTable: Moved
@@ -22,6 +22,9 @@ class Game {
     this.currPlayer = 1;
   }
 
+  /** makeBoard: create in-JS board structure:
+ *   board = array of rows, each row is array of cells  (board[y][x])
+ */
   makeBoard() {
     for (let y = 0; y < this.height; y++) {
       //Change WIDTH to width & HEIGHT to height as no longer global consts
@@ -29,6 +32,8 @@ class Game {
       this.board.push(Array.from({ length: this.width }));
     }
   }
+
+  /** makeHtmlBoard: make HTML table and row of column tops. */
 
   makeHtmlBoard() {
     const board = document.getElementById('board');
@@ -62,6 +67,8 @@ class Game {
     }
   }
 
+  /** findSpotForCol: given column x, return top empty y (null if filled) */
+
   findSpotForCol(x) {
     for (let y = this.height - 1; y >= 0; y--) {
       //board here is board within constructor, needs access with this.
@@ -72,6 +79,8 @@ class Game {
     return null;
   }
 
+  /** placeInTable: update DOM to place piece into HTML table of board */
+
   placeInTable(y, x) {
     const piece = document.createElement('div');
     piece.classList.add('piece');
@@ -81,6 +90,8 @@ class Game {
     const spot = document.getElementById(`${y}-${x}`);
     spot.append(piece);
   }
+
+  /** endGame: announce game end */
 
   endGame(msg) {
     alert(msg);
