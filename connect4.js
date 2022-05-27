@@ -164,7 +164,7 @@ class Game {
 }
 }
 
-
+const fresh = new Game(6, 7);   // assuming constructor takes height, width
 
 
 /** Connect Four
@@ -326,5 +326,5 @@ function checkForWin() {
   }
 }
 
-makeBoard();
-makeHtmlBoard();
+fresh.makeBoard();
+fresh.makeHtmlBoard();
