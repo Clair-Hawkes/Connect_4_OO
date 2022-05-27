@@ -21,6 +21,8 @@ class Game {
     this.width = width;
     this.board = [];
     this.currPlayer = 1;
+    this.makeBoard();
+    this.makeHtmlBoard();
   }
 
   /** makeBoard: create in-JS board structure:
@@ -43,7 +45,7 @@ class Game {
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
     //can we use .bind for the handleClick?
-    top.addEventListener('click', this.handleClick);
+    top.addEventListener('click', this.handleClick.bind(this));
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
@@ -221,15 +223,6 @@ function makeHtmlBoard() {
     board.append(row);
   }
 
-  function findSpotForCol(x) {
-    for (let y = HEIGHT - 1; y >= 0; y--) {
-      if (!board[y][x]) {
-        return y;
-      }
-    }
-    return null;
-  }
-
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
@@ -326,5 +319,4 @@ function checkForWin() {
   }
 }
 
-fresh.makeBoard();
-fresh.makeHtmlBoard();
+
